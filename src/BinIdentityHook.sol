@@ -7,10 +7,9 @@ import "./ChallengeResponseVerifier.sol";
 import "./ReputationSystem.sol";
 import "./../lib/pancake-v4-core/src/pool-bin/interfaces/IBinPoolManager.sol";
 import "./../lib/pancake-v4-core/src/types/PoolKey.sol";
-import "./../lib/openzeppelin-contracts-upgradeable/lib/openzeppelin-contracts/contracts/proxy/utils/Initializable.sol";
 import "./../lib/openzeppelin-contracts-upgradeable/contracts/access/AccessControlUpgradeable.sol";
 
-contract BinIdentityHook is Initializable, AccessControlUpgradeable, BaseIdentityHook, IBinIdentityHook {
+contract BinIdentityHook is AccessControlUpgradeable, BaseIdentityHook, IBinIdentityHook {
     IBinPoolManager public binPoolManager;
     ChallengeResponseVerifier public challengeResponseVerifier;
     ReputationSystem public reputationSystem;

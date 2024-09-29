@@ -4,13 +4,11 @@ pragma solidity ^0.8.20;
 import "./../lib/openzeppelin-contracts-upgradeable/contracts/access/AccessControlUpgradeable.sol";
 import "./../lib/openzeppelin-contracts-upgradeable/contracts/utils/PausableUpgradeable.sol";
 import "./../lib/openzeppelin-contracts-upgradeable/contracts/proxy/utils/Initializable.sol";
-// import "./../lib/openzeppelin/contracts-upgradeable/utils/structs/EnumerableSetUpgradeable.sol";
 import "./BrevisZKAdapter.sol";
 import "./ChallengeResponseVerifier.sol";
 import "./ReputationSystem.sol";
 
 abstract contract BaseIdentityHook is Initializable, AccessControlUpgradeable, PausableUpgradeable {
-    using EnumerableSetUpgradeable for EnumerableSetUpgradeable.AddressSet;
 
     BrevisZKAdapter public brevisAdapter;
     ChallengeResponseVerifier public challengeVerifier;
@@ -27,7 +25,6 @@ abstract contract BaseIdentityHook is Initializable, AccessControlUpgradeable, P
     mapping(address => UserInfo) public userInfo;
     mapping(VerificationLevel => uint256) public swapLimits;
     mapping(VerificationLevel => uint256) public requiredProofs;
-    EnumerableSetUpgradeable.AddressSet private verifiedUsers;
 
     bytes32 public constant ADMIN_ROLE = keccak256("ADMIN_ROLE");
     bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
