@@ -13,7 +13,6 @@ contract BinIdentityHook is AccessControlUpgradeable, BaseIdentityHook, IBinIden
     IBinPoolManager public binPoolManager;
     ChallengeResponseVerifier public challengeResponseVerifier;
     ReputationSystem public reputationSystem;
-
     uint256 public constant REPUTATION_THRESHOLD = 100;
     uint256 public constant MAX_VERIFICATIONS_PER_BLOCK = 10;
 

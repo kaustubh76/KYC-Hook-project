@@ -7,6 +7,8 @@ import "./../../lib/pancake-v4-core/src/types/PoolKey.sol";
 import "./IBaseIdentityHook.sol";
 
 interface ICLIdentityHook is IHooks, IBaseIdentityHook {
+    function initialize(IPoolManager _poolManager, IBrevisZKCoprocessor _brevisZKCoprocessor) external;
+    
     function beforeSwap(
         address sender,
         PoolKey calldata key,
@@ -14,7 +16,7 @@ interface ICLIdentityHook is IHooks, IBaseIdentityHook {
         bytes calldata hookData
     ) external returns (bytes4);
 
-    function afterSwap(
+     function afterSwap(
         address sender,
         PoolKey calldata key,
         IPoolManager.SwapParams calldata params,

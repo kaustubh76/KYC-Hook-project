@@ -32,4 +32,5 @@ interface IBaseIdentityHook {
     function unpause() external;
     function getSwapLimit(VerificationLevel level) external view returns (uint256);
     function getRequiredProofs(VerificationLevel level) external view returns (uint256);
+
 }

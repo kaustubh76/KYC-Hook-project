@@ -11,8 +11,6 @@ contract AdminDashboard is AccessControl {
     BinIdentityHook public binHook;
     ReputationSystem public reputationSystem;
 
-    bytes32 public constant ADMIN_ROLE = keccak256("ADMIN_ROLE");
-
     constructor(
         CLIdentityHook _clHook,
         BinIdentityHook _binHook,
@@ -22,10 +20,8 @@ contract AdminDashboard is AccessControl {
         binHook = _binHook;
         reputationSystem = _reputationSystem;
         _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
-        _setupRole(ADMIN_ROLE, msg.sender);
     }
-
-    // Rest of your contract functions...
+    
 
     function setSwapLimits(BaseIdentityHook.VerificationLevel level, uint256 newLimit) external onlyRole(ADMIN_ROLE) {
         clHook.setSwapLimit(level, newLimit);
@@ -57,5 +53,13 @@ contract AdminDashboard is AccessControl {
         clVerifiedUsers = clHook.getVerifiedUserCount();
         binVerifiedUsers = binHook.getVerifiedUserCount();
         totalReputationScore = reputationSystem.getTotalReputationScore();
+    }
+
+     function updateBrevisZKCoprocessor(IBrevisZKCoprocessor _newBrevisZKCoprocessor) external onlyRole(ADMIN_ROLE) {
+        address oldCoprocessor = address(brevisZKCoprocessor);
+        brevisZKCoprocessor = _newBrevisZKCoprocessor;
+        clHook.updateBrevisZKCoprocessor(_newBrevisZKCoprocessor);
+        binHook.updateBrevisZKCoprocessor(_newBrevisZKCoprocessor);
+        emit BrevisZKCoprocessorUpdated(oldCoprocessor, address(_newBrevisZKCoprocessor));
     }
 }
